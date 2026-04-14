@@ -1,0 +1,85 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import RoleSelect from './pages/RoleSelect';
+import UserDashboard from './pages/UserDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import './App.css';
+
+// Dashboard router component to handle role-based routing
+const Dashboard = () => {
+  const { selectedRole } = useAuth();
+
+  if (selectedRole === 'ROLE_ADMIN') {
+    return <Navigate to="/admin-dashboard" replace />;
+  } else {
+    return <Navigate to="/user-dashboard" replace />;
+  }
+};
+
+function AppRoutes() {
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* Role selection */}
+      <Route
+        path="/role-select"
+        element={
+          <ProtectedRoute>
+            <RoleSelect />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Protected routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/user-dashboard"
+        element={
+          <ProtectedRoute requiredRole="ROLE_USER">
+            <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin-dashboard"
+        element={
+          <ProtectedRoute requiredRole="ROLE_ADMIN">
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Fallback */}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
+  );
+}
+
+export default App;
