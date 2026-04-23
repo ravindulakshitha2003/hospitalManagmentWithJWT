@@ -9,6 +9,8 @@ import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
 import CreateAppointment from './pages/CreateAppointment';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Dashboard router component to handle role-based routing
 const Dashboard = () => {
@@ -24,6 +26,7 @@ const Dashboard = () => {
 function AppRoutes() {
   return (
     <Routes>
+       
       {/* Public routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -37,6 +40,7 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route path="/CreateAppointment" element={<CreateAppointment />} />
 
       {/* Protected routes */}
       <Route
@@ -52,7 +56,7 @@ function AppRoutes() {
         path="/user-dashboard"
         element={
           <ProtectedRoute requiredRole="ROLE_USER">
-            <CreateAppointment/>
+            <UserDashboard/>
           </ProtectedRoute>
         }
       />
@@ -77,6 +81,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <ToastContainer position="bottom-right" />
         <AppRoutes />
       </AuthProvider>
     </Router>

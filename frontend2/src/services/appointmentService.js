@@ -16,7 +16,18 @@ const  appointmentService = {
     } catch (error) {
       throw error.response?.data || error.message;
     }
+  },
+
+
+   docters : async () => {
+  try {
+    const response = await api.get('/api/v1/User/allDocters');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
   }
+}
+
 
 }
 export  default appointmentService;

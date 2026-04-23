@@ -12,10 +12,14 @@ const UserDashboard = () => {
     navigate('/login');
   };
 
+   const appointmnet = ()=>{
+    navigate('/CreateAppointment');
+   }
   return (
     <div className="dashboard-container">
       <nav className="navbar">
         <h1>Hospital Management System</h1>
+        <button onClick={appointmnet}  className="btn-logout" style={{ backgroundColor: "blue", color: "white", padding: "10px" }}> Create appoinet </button>
         <button onClick={handleLogout} className="btn-logout">
           Logout
         </button>

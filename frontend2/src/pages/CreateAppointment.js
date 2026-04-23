@@ -1,14 +1,38 @@
-import React, {  useState, useCallback } from 'react';
+import React, {  useState, useEffect , useCallback } from 'react';
+import DoctorSuggest from "../components/DoctorSuggest";
+import appointmentService from "../services/appointmentService"
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import "../styles/Appoinment.css"
-import appointmentService from '../services/appointmentService';
-
-
 // Inject the provided stylesheet + extra appointment styles
 
 
 const VISIT_TYPES = ["In-Person", "Telemedicine", "Follow-Up", "Emergency", "Consultation", "Routine"];
 
 export default function CreateAppointment() {
+   const navigate = useNavigate();
+  const [doctorList, setDoctorList] = useState([]);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const data = await appointmentService.docters();
+        setDoctorList(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchDoctors();
+      }, []);
+
+
+
+const showAlert = () => {
+  toast.success("Appointment created successfully!");
+};
+
+
   // Mock useAuth — replace with your real hook
   const appoinet = useCallback(async (data) => {
     setLoading(true);
@@ -16,15 +40,16 @@ export default function CreateAppointment() {
     try {
       const response = await appointmentService.createAppointment(data.patient, data.docter, data.price, data.status, data.reason, data.visitType)
       return { success: true, message: response.message || 'Appoinment successful' };
+      
     } catch (err) {
       const errorMessage = err.error || err.message || 'Appoinment failed';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
+      
       setLoading(false);
     }
   }, []);
-
 
   const [form, setForm] = useState({
     patient: "",
@@ -65,10 +90,14 @@ export default function CreateAppointment() {
       await appoinet(payload);
       setSuccess("Appointment created successfully!");
       setForm({ patient: "", docter: "", price: "", status: false, reason: "", visitType: "" });
+      showAlert();
+      navigate('/UserDashboard');
     } catch (err) {
       setError(err?.message || "Failed to create appointment. Please try again.");
     } finally {
       setLoading(false);
+      
+      
     }
   };
 
@@ -76,7 +105,7 @@ export default function CreateAppointment() {
 
   return (
     <>
-      
+     
       <div className="auth-container">
         <div className="auth-card">
           <h1>MediBook</h1>
@@ -98,13 +127,11 @@ export default function CreateAppointment() {
               />
             </div>
             <div className="form-group">
-              <label>Doctor <span className="required">*</span></label>
-              <se
-                type="text"
-                placeholder="Dr. Last name"
-                value={form.docter}
-                onChange={set("docter")}
-              />
+              <DoctorSuggest
+  doctors={doctorList}
+  value={form.docter}
+  onChange={(val) => setForm(prev => ({ ...prev, docter: val }))}
+/>
             </div>
           </div>
 
