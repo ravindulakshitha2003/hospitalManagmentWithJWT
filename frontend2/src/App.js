@@ -8,6 +8,7 @@ import RoleSelect from './pages/RoleSelect';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
+import CreateAppointment from './pages/CreateAppointment';
 
 // Dashboard router component to handle role-based routing
 const Dashboard = () => {
@@ -51,7 +52,7 @@ function AppRoutes() {
         path="/user-dashboard"
         element={
           <ProtectedRoute requiredRole="ROLE_USER">
-            <UserDashboard />
+            <CreateAppointment/>
           </ProtectedRoute>
         }
       />

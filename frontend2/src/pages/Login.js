@@ -20,6 +20,7 @@ const Login = () => {
 
     if (result.success) {
       if (result.requiresRoleSelection) {
+        console.log(result.requiresRoleSelection)
         navigate('/role-select', { state: { roles: result.roles } });
       } else {
         navigate('/dashboard');
