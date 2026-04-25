@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
+import ReportsList from "../components/ReportsList";
+import ReportDetail from "../components/ReportDetail";
+import docterService from "../services/docterService";
+
 
 const DOCTOR = {
   name: "Dr. Arjun Mehta",
@@ -166,7 +170,25 @@ export default function DoctorDashboard() {
   const [newRx, setNewRx] = useState({ medicine: "", dosage: "", duration: "", instructions: "" });
   const [notes, setNotes] = useState({});
   const [labComments, setLabComments] = useState({});
-  const [settingsMode, setSettingsMode] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [REPORTS , setREPORTS] =  useState([]);
+  
+
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      try {
+        const data = await docterService.reports('ravindu');
+        setREPORTS(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchReport();
+      }, []);
+
+
      const navigate = useNavigate();
   const unreadCount = NOTIFICATIONS.filter(n => n.unread).length;
 
@@ -489,7 +511,8 @@ export default function DoctorDashboard() {
               <button onClick={()=>navigate("/MedicalReport")} className="btn-secondary">
                 ADD REPOST
               </button>
-              
+              <ReportsList reports={REPORTS} onSelect={setSelected} />
+              <ReportDetail report={selected} onClose={() => setSelected(null)} />
             </div>
           )}
 
