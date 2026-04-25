@@ -28,6 +28,20 @@ const  appointmentService = {
   }
 }
 
+, 
+ allappoinment :async (username) => {
+  try {
+    const response = await api.post('/api/v1/User/allAppinment',
+      {
+        username
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+ }
+
 
 }
 export  default appointmentService;

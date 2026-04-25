@@ -23,7 +23,7 @@ const Login = () => {
         console.log(result.requiresRoleSelection)
         navigate('/role-select', { state: { roles: result.roles } });
       } else {
-        navigate('/dashboard');
+        navigate('/user-dashboard');
       }
     } else {
       setError(result.error);

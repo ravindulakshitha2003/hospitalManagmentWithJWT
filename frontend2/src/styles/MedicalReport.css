@@ -1,0 +1,642 @@
+/* ============================================
+   MediCore HMS — Medical Report Styles
+   Theme: Clean Light — white + deep blue + coral
+   Font: DM Serif Display + DM Sans
+============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-page:    #eef2f7;
+  --bg-card:    #ffffff;
+  --bg-section: #f6f9fc;
+  --bg-input:   #ffffff;
+  --bg-header:  #1e3a5f;
+
+  --blue:       #1e3a5f;
+  --blue-mid:   #2d5282;
+  --blue-light: #3b82c4;
+  --blue-pale:  #dbeafe;
+
+  --coral:      #dc2626;
+  --coral-pale: #fee2e2;
+  --green:      #16a34a;
+  --green-pale: #dcfce7;
+  --amber:      #d97706;
+  --amber-pale: #fef3c7;
+
+  --text-primary:   #111827;
+  --text-secondary: #374151;
+  --text-muted:     #6b7280;
+  --text-label:     #1e40af;
+  --text-white:     #ffffff;
+
+  --border:       #d1d5db;
+  --border-focus: #3b82f6;
+  --border-card:  #e5e7eb;
+
+  --accent-glow: rgba(59,130,246,0.12);
+
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 20px rgba(0,0,0,0.1);
+  --shadow-lg:  0 8px 40px rgba(0,0,0,0.14);
+
+  --font-head: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.hms-header {
+  background: var(--bg-header);
+  border-bottom: 3px solid var(--blue-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.hms-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hms-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hms-logo-cross {
+  font-size: 26px;
+  color: #60d8f5;
+  line-height: 1;
+}
+
+.hms-logo div { display: flex; flex-direction: column; }
+
+.hms-logo-title {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.hms-logo-sub {
+  font-size: 0.67rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hms-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+}
+
+.hms-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #60d8f5;
+  box-shadow: 0 0 8px rgba(96,216,245,0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; }
+  50%     { opacity:0.35; }
+}
+
+.hms-header-actions { display: flex; gap: 10px; }
+
+/* ── BUTTONS ── */
+.hms-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hms-btn-ghost {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.hms-btn-ghost:hover { background: rgba(255,255,255,0.2); color:#fff; }
+
+.hms-btn-primary {
+  background: #60d8f5;
+  color: var(--blue);
+  font-weight: 700;
+}
+.hms-btn-primary:hover { background: #3bc8e8; }
+
+.hms-btn-submit {
+  background: linear-gradient(135deg, #2563eb 0%, var(--blue-mid) 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 13px 36px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+}
+.hms-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.45);
+}
+
+/* ── FORM MAIN ── */
+.hms-form-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 44px 24px 80px;
+}
+
+.hms-form-intro {
+  margin-bottom: 30px;
+  animation: fadeUp 0.4s ease both;
+}
+
+.hms-form-intro h1 {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.hms-form-intro p {
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+}
+
+/* ── FORM SECTIONS ── */
+.hms-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hms-form-section {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  animation: fadeUp 0.4s ease both;
+}
+
+.hms-form-section:nth-child(1) { animation-delay:0.04s; }
+.hms-form-section:nth-child(2) { animation-delay:0.08s; }
+.hms-form-section:nth-child(3) { animation-delay:0.12s; }
+.hms-form-section:nth-child(4) { animation-delay:0.16s; }
+.hms-form-section:nth-child(5) { animation-delay:0.20s; }
+.hms-form-section:nth-child(6) { animation-delay:0.24s; }
+
+.hms-form-section:hover,
+.hms-form-section.hms-active {
+  border-color: var(--blue-light);
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-md);
+}
+
+.hms-form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hms-form-section-icon { font-size: 1.15rem; line-height: 1; }
+
+.hms-form-section-header h2 {
+  font-family: var(--font-head);
+  font-size: 1.08rem;
+  color: var(--text-primary);
+}
+
+.hms-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.hms-form-grid-1 { grid-template-columns: 1fr; }
+
+/* ── FIELDS ── */
+.hms-field { display: flex; flex-direction: column; gap: 5px; }
+.hms-field-half { max-width: 280px; }
+
+.hms-field label {
+  font-size: 0.71rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-label);
+}
+
+.hms-field input,
+.hms-field select,
+.hms-field textarea {
+  background: var(--bg-section);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 10px 13px;
+  transition: var(--transition);
+  outline: none;
+  resize: vertical;
+}
+
+.hms-field input:focus,
+.hms-field select:focus,
+.hms-field textarea:focus {
+  border-color: var(--border-focus);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.hms-field input::placeholder,
+.hms-field textarea::placeholder { color: var(--text-muted); }
+
+.hms-field select option {
+  background: #fff;
+  color: var(--text-primary);
+}
+
+/* ── FORM ACTIONS ── */
+.hms-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  animation: fadeUp 0.4s 0.28s ease both;
+}
+
+.hms-form-actions .hms-btn-ghost {
+  background: #fff;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+.hms-form-actions .hms-btn-ghost:hover {
+  background: var(--bg-section);
+  color: var(--text-primary);
+}
+
+/* ── REPORT VIEW ── */
+.hms-report-view {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.hms-report-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.hms-report-hero {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+  padding: 32px 40px;
+  border-bottom: 3px solid var(--blue-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.hms-report-hero::before {
+  content: "✚";
+  position: absolute;
+  right: -30px; top: -30px;
+  font-size: 180px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.hms-report-hero-text h1 {
+  font-family: var(--font-head);
+  font-size: 1.85rem;
+  color: #ffffff;
+}
+
+.hms-report-hero-text p {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.84rem;
+  margin-top: 5px;
+}
+
+/* ── SEVERITY ── */
+.hms-severity-badge {
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.hms-severity-mild     { background: var(--green-pale); color: var(--green); border: 1.5px solid var(--green); }
+.hms-severity-moderate { background: var(--amber-pale); color: var(--amber); border: 1.5px solid var(--amber); }
+.hms-severity-severe   { background: var(--coral-pale); color: var(--coral); border: 1.5px solid var(--coral); }
+.hms-severity-critical {
+  background: #fee2e2; color: #991b1b; border: 1.5px solid #dc2626;
+  animation: criticalPulse 1.5s infinite;
+}
+
+@keyframes criticalPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.35); }
+  50%     { box-shadow: 0 0 0 6px rgba(220,38,38,0); }
+}
+
+/* ── REPORT GRID ── */
+.hms-report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hms-report-section {
+  padding: 24px 30px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.hms-report-section:nth-child(even) { border-right: none; }
+
+.hms-full-width { grid-column: 1 / -1; border-right: none; }
+
+.hms-section-title {
+  font-family: var(--font-head);
+  font-size: 0.97rem;
+  color: var(--blue-mid);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hms-icon { font-size: 1rem; }
+
+/* ── INFO GRID ── */
+.hms-info-grid { display: flex; flex-direction: column; gap: 8px; }
+
+.hms-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.88rem;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.hms-info-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.hms-info-item span:first-child {
+  color: var(--text-muted);
+  font-size: 0.81rem;
+  white-space: nowrap;
+}
+
+.hms-info-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+.hms-id {
+  font-family: monospace;
+  color: var(--blue-mid) !important;
+  font-size: 0.81rem !important;
+  background: var(--blue-pale);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #bfdbfe;
+}
+
+/* ── VITALS ── */
+.hms-vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+
+.hms-vital-card {
+  background: var(--bg-section);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.hms-vital-card:hover {
+  border-color: var(--blue-light);
+  background: var(--blue-pale);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.hms-vital-icon { font-size: 1.4rem; margin-bottom: 2px; }
+
+.hms-vital-value {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.hms-vital-label {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* ── DIAGNOSIS ── */
+.hms-diagnosis-box {
+  background: var(--blue-pale);
+  border: 1.5px solid #bfdbfe;
+  border-left: 4px solid var(--blue-light);
+  border-radius: var(--radius-sm);
+  padding: 13px 17px;
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  color: var(--blue);
+}
+
+/* ── COMPLAINT ── */
+.hms-complaint-text {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  border-left: 3px solid var(--blue-light);
+  padding-left: 14px;
+  font-style: italic;
+}
+
+/* ── PRESCRIPTION ── */
+.hms-prescription-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hms-prescription-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 10px 14px;
+  background: var(--bg-section);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.hms-prescription-list li::before {
+  content: "💊";
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* ── NOTES ── */
+.hms-notes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hms-notes-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  padding: 7px 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.hms-notes-list li::before {
+  content: "→";
+  color: var(--amber);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ── FOLLOW-UP ── */
+.hms-followup-text { font-size: 0.92rem; color: var(--text-secondary); }
+.hms-followup-text strong { color: var(--blue); font-size: 1rem; font-weight: 700; }
+
+/* ── REPORT FOOTER ── */
+.hms-report-footer {
+  padding: 26px 40px;
+  background: #f8fafd;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border);
+}
+
+.hms-signature { display: flex; flex-direction: column; gap: 5px; }
+
+.hms-sig-line {
+  width: 180px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-mid), transparent);
+  margin-bottom: 6px;
+}
+
+.hms-signature p { font-size: 0.85rem; color: var(--text-muted); }
+.hms-signature p:first-of-type { color: var(--text-primary); font-weight: 600; }
+
+.hms-stamp {
+  width: 86px; height: 86px;
+  border-radius: 50%;
+  border: 2px dashed var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transform: rotate(-8deg);
+}
+
+.hms-stamp-inner {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 2px; text-align: center;
+}
+
+.hms-stamp-inner span:nth-child(1) { font-size: 1.2rem; color: var(--blue-light); }
+.hms-stamp-inner span:nth-child(2) {
+  font-size: 0.52rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--blue-mid); text-transform: uppercase;
+}
+.hms-stamp-inner span:nth-child(3) {
+  font-size: 0.47rem; color: var(--text-muted); letter-spacing: 0.05em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── PRINT ── */
+@media print {
+  .hms-header-actions, .hms-btn { display: none !important; }
+  .hms-header { position: static; }
+  body { background: #fff; }
+  .hms-report-card { box-shadow: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hms-header-inner { padding: 12px 16px; }
+  .hms-form-main, .hms-report-view { padding: 20px 14px 60px; }
+  .hms-form-section { padding: 18px 16px; }
+  .hms-report-hero { padding: 22px 20px; flex-direction: column; gap: 12px; }
+  .hms-report-grid { grid-template-columns: 1fr; }
+  .hms-report-section { border-right: none; }
+  .hms-report-footer { flex-direction: column-reverse; gap: 18px; align-items: flex-start; }
+  .hms-form-actions { flex-direction: column; }
+  .hms-btn-submit { width: 100%; text-align: center; }
+}

@@ -91,9 +91,10 @@ const showAlert = () => {
       setSuccess("Appointment created successfully!");
       setForm({ patient: "", docter: "", price: "", status: false, reason: "", visitType: "" });
       showAlert();
-      navigate('/UserDashboard');
+      navigate('/userdashboard');
     } catch (err) {
       setError(err?.message || "Failed to create appointment. Please try again.");
+      navigate('/user-dashboard');
     } finally {
       setLoading(false);
       

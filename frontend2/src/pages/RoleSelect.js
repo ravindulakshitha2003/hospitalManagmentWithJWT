@@ -10,9 +10,18 @@ const RoleSelect = () => {
   const roles = location.state?.roles || [];
 
   const handleSelectRole = (role) => {
-    selectRole(role);
-    navigate('/dashboard');
-  };
+  selectRole(role);
+
+  if (role === "ROLE_STAFF") {
+    navigate("/doctor-dashboard");
+  } else if (role === "ROLE_USER") {
+    navigate("/user-dashboard");
+  } else if (role === "ROLE_ADMIN") {
+    navigate("/admin-dashboard");
+  } else {
+    navigate("/");
+  }
+};
 
   return (
     <div className="auth-container">

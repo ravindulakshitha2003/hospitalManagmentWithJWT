@@ -1,0 +1,60 @@
+.notfound-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7fb;
+  text-align: center;
+}
+
+.notfound-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+}
+
+.notfound-box h1 {
+  font-size: 80px;
+  margin: 0;
+  color: #185FA5;
+}
+
+.notfound-box h2 {
+  margin: 10px 0;
+}
+
+.notfound-box p {
+  color: #666;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-primary {
+  padding: 10px 15px;
+  background: #185FA5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  padding: 10px 15px;
+  background: #ddd;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+}

@@ -11,6 +11,9 @@ import './App.css';
 import CreateAppointment from './pages/CreateAppointment';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from './pages/NotFound';
+import MedicalReport from './pages/MedicalReport';
+import DoctorDashboard from './pages/DoctorDashboard';
 
 // Dashboard router component to handle role-based routing
 const Dashboard = () => {
@@ -40,8 +43,14 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      <Route path="/CreateAppointment" element={<CreateAppointment />} />
-
+      <Route path="/CreateAppointment" element={
+        
+        <ProtectedRoute>
+           <CreateAppointment />
+          </ProtectedRoute>
+        } />
+        
+        
       {/* Protected routes */}
       <Route
         path="/dashboard"
@@ -60,6 +69,14 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/doctor-dashboard"
+        element={
+          <ProtectedRoute requiredRole="ROLE_STAFF">
+            <DoctorDashboard/>
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         path="/admin-dashboard"
@@ -69,10 +86,25 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/MedicalReport"
+        element={
+          <ProtectedRoute >
+            <MedicalReport />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/NotFound"
+        element={
+          <NotFound></NotFound>
+        }
+      />
+      
 
       {/* Fallback */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/NotFound" replace />} />
     </Routes>
   );
 }

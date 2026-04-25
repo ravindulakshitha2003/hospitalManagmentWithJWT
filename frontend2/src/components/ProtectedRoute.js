@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { isAuthenticated, selectedRole, loading } = useAuth();
+  console.log(isAuthenticated);
 
   if (loading) {
     return <div style={{ padding: '20px' }}>Loading...</div>;
